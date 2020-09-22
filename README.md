@@ -1,8 +1,8 @@
 # orvindemsy.github.io
 
 
-## Project 1
-[abc](Coursera - Machine Learning)
+# Project 1
+[abc](https://github.com/orvindemsy/coursera-machine-learning)
 ## MATLAB Code
 These are the code I created for homework on Machine Learning Coursera course  
 All homework exercises in MATLAB are finished on Aug 12th, 2019
@@ -11,3 +11,7 @@ All homework exercises in MATLAB are finished on Aug 12th, 2019
 As an exercise, each homework is also done in python  
 All homework exercises in python are finished on June 6th, 2020  
 Coded in jupyter notebook, all functions are defined inside each notebook file
+
+
+# [CSP](https://github.com/orvindemsy/BCI-Classification)
+Implementation of CSP according to the paper
