@@ -1,8 +1,9 @@
-# orvindemsy.github.io
+Welcome, my name is Orvin Demsy
+currently student in Tohoku University doing research in Brain-Computer Interface
 
+here are my projects
 
-# Project 1
-[abc](https://github.com/orvindemsy/coursera-machine-learning)
+# [Coursera-Machine Learning](https://github.com/orvindemsy/coursera-machine-learning)
 ## MATLAB Code
 These are the code I created for homework on Machine Learning Coursera course  
 All homework exercises in MATLAB are finished on Aug 12th, 2019
