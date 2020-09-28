@@ -3,8 +3,6 @@ currently student in Tohoku University doing research in Brain-Computer Interfac
 
 here are my projects
 
-This is newly written sentence
-
 # [Coursera-Machine Learning](https://github.com/orvindemsy/coursera-machine-learning)
 
 Repo containing homework solution of Andrew Ng's Coursera Standford Machine Learning Course both in matlab and python code. 
