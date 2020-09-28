@@ -1,4 +1,3 @@
-# Welcomeeee
 Welcome, my name is Orvin Demsy
 currently student in Tohoku University doing research in Brain-Computer Interface
 
@@ -7,15 +6,14 @@ here are my projects
 This is newly written sentence
 
 # [Coursera-Machine Learning](https://github.com/orvindemsy/coursera-machine-learning)
-## MATLAB Code
-These are the code I created for homework on Machine Learning Coursera course  
-All homework exercises in MATLAB are finished on Aug 12th, 2019
 
-## Python Code
-As an exercise, each homework is also done in python  
-All homework exercises in python are finished on June 6th, 2020  
-Coded in jupyter notebook, all functions are defined inside each notebook file
+Repo containing homework solution of Andrew Ng's Coursera Standford Machine Learning Course both in matlab and python code. 
 
+completed on Aug 12th, 2019
 
+In addition to that I also redid all the work in python with minimal use of sklearn. I was beginning my python journey so my goal was to familiarize myself with python. 
+
+completed on June 6th, 2020
+<!-- 
 # [CSP](https://github.com/orvindemsy/BCI-Classification)
-Implementation of CSP according to the paper
+Implementation of CSP according to the paper -->
