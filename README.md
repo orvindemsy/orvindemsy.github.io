@@ -1,7 +1,4 @@
-Welcome, my name is Orvin Demsy
-currently student in Tohoku University doing research in Brain-Computer Interface
-
-here are my projects
+Here are my projects
 
 # [Coursera-Machine Learning](https://github.com/orvindemsy/coursera-machine-learning)
 
