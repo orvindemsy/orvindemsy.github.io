@@ -4,6 +4,8 @@ currently student in Tohoku University doing research in Brain-Computer Interfac
 
 here are my projects
 
+This is newly written sentence
+
 # [Coursera-Machine Learning](https://github.com/orvindemsy/coursera-machine-learning)
 ## MATLAB Code
 These are the code I created for homework on Machine Learning Coursera course  
