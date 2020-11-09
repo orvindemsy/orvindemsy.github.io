@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Orvin Demsy</title>
-    <link>https://orvindemsy.github.io/portfolio/tags/</link>
+    <link>https://orvindemsy.github.io/tags/</link>
     <description>Recent content in Tags on Orvin Demsy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/portfolio/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hp-tuning</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/hp-tuning/</link>
+      <link>https://orvindemsy.github.io/tags/hp-tuning/</link>
       <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://orvindemsy.github.io/portfolio/tags/hp-tuning/</guid>
+      <guid>https://orvindemsy.github.io/tags/hp-tuning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>machine-learning</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/machine-learning/</link>
+      <link>https://orvindemsy.github.io/tags/machine-learning/</link>
       <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://orvindemsy.github.io/portfolio/tags/machine-learning/</guid>
+      <guid>https://orvindemsy.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bci</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/bci/</link>
+      <link>https://orvindemsy.github.io/tags/bci/</link>
       <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://orvindemsy.github.io/portfolio/tags/bci/</guid>
+      <guid>https://orvindemsy.github.io/tags/bci/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gui</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/gui/</link>
+      <link>https://orvindemsy.github.io/tags/gui/</link>
       <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://orvindemsy.github.io/portfolio/tags/gui/</guid>
+      <guid>https://orvindemsy.github.io/tags/gui/</guid>
       <description></description>
     </item>
     
