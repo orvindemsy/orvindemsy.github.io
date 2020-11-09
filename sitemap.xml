@@ -24,6 +24,20 @@
   </url>
   
   <url>
+    <loc>https://orvindemsy.github.io/portfolio/tags/machine-learning-hp-tuning/</loc>
+    <lastmod>2020-10-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://orvindemsy.github.io/portfolio/tags/</loc>
+    <lastmod>2020-10-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://orvindemsy.github.io/portfolio/blog/blog-3/</loc>
     <lastmod>2020-10-03T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -74,13 +88,6 @@
   
   <url>
     <loc>https://orvindemsy.github.io/portfolio/tags/machine-learning/</loc>
-    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://orvindemsy.github.io/portfolio/tags/</loc>
     <lastmod>2020-07-15T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
