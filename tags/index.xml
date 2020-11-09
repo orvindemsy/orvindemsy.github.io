@@ -8,11 +8,20 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/portfolio/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>machine-learning, hp-tuning</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/machine-learning-hp-tuning/</link>
+      <title>hp-tuning</title>
+      <link>https://orvindemsy.github.io/portfolio/tags/hp-tuning/</link>
       <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://orvindemsy.github.io/portfolio/tags/machine-learning-hp-tuning/</guid>
+      <guid>https://orvindemsy.github.io/portfolio/tags/hp-tuning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine-learning</title>
+      <link>https://orvindemsy.github.io/portfolio/tags/machine-learning/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/portfolio/tags/machine-learning/</guid>
       <description></description>
     </item>
     
@@ -31,15 +40,6 @@
       <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://orvindemsy.github.io/portfolio/tags/gui/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine-learning</title>
-      <link>https://orvindemsy.github.io/portfolio/tags/machine-learning/</link>
-      <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://orvindemsy.github.io/portfolio/tags/machine-learning/</guid>
       <description></description>
     </item>
     
