@@ -27,23 +27,23 @@
     
     
     <meta property="og:title" content="KL divergence on iris dataset" />
-<meta property="og:description" content="Will be updated soon" />
+<meta property="og:description" content="KL Divergence on Multivariate Gaussian (Example on Iris Dataset) I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1]. But I could not find example KL divergence on multivariate data." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://orvindemsy.github.io/blog/blog-2/" />
 <meta property="article:published_time" content="2020-08-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-21T00:00:00+00:00" />
 <meta itemprop="name" content="KL divergence on iris dataset">
-<meta itemprop="description" content="Will be updated soon">
+<meta itemprop="description" content="KL Divergence on Multivariate Gaussian (Example on Iris Dataset) I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1]. But I could not find example KL divergence on multivariate data.">
 <meta itemprop="datePublished" content="2020-08-21T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-08-21T00:00:00+00:00" />
-<meta itemprop="wordCount" content="4">
+<meta itemprop="wordCount" content="1199">
 
 
 
-<meta itemprop="keywords" content="," />
+<meta itemprop="keywords" content="kl_div,similarity," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KL divergence on iris dataset"/>
-<meta name="twitter:description" content="Will be updated soon"/>
+<meta name="twitter:description" content="KL Divergence on Multivariate Gaussian (Example on Iris Dataset) I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1]. But I could not find example KL divergence on multivariate data."/>
 
 	
   </head>
@@ -187,11 +187,233 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>Will be updated soon</p>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="kl-divergence-on-multivariate-gaussian-example-on-iris-dataset">KL Divergence on Multivariate Gaussian (Example on Iris Dataset)</h1>
+<p>I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1].  But I could not find example KL divergence on multivariate data.</p>
+<p>As someone who had minimal knowledge in information theory, I wanted to see how, given the equation, it can be applied to multivariate data. This blog is the kind of thing I wished I had found at that time. Here I will present a quick and simple example of applying Kullback-Leibler divergence on data with multiple features (multivariate data). In this example we will use our long-old friend, iris dataset.</p>
+<h2 id="the-definition-and-equation">The Definition and Equation</h2>
+<p>Given two d dimensional data multivariate Gaussian distribution $P = \mathcal{N}(\mu_1,\Sigma_1)$ and $Q = \mathcal{N}(μ_2,Σ_2)$</p>
+<p>$$
+KL=\frac12 [log |Σ_2 |/|Σ_1 | -d+tr (Σ_2^(-1) Σ_1 )+(μ_2-μ_1 )^T Σ_2^(-1) (μ_2-μ_1 )]$$</p>
+<p>For those who are curious on the derivation of this, please look at [2], [3]. Worth noting that:</p>
+<ol>
+<li><em><strong>d</strong></em> dimensional simply means we have d features in our data.</li>
+<li>The more similar two distributions are the closer KL divergence is to zero.</li>
+</ol>
+<h2 id="the-dataset">The Dataset</h2>
+<p>Iris dataset is a classic public dataset that consists of 150 samples and 4 features. The data consist of three class of iris flower, for simplicity we will only compare feature of two kinds of flowers, and we will also test KL divergence on those extracted two-class data with two features and all four features, using only two features allow us to visualize features distribution. These are four cases on which KL divergence will be tested:</p>
+<ol>
+<li>Same class, two features</li>
+<li>Different class, two features</li>
+<li>Same class, four features</li>
+<li>Different class, four features</li>
+</ol>
+<p> </p>
+<h2 id="load-dataset">Load dataset</h2>
+<p>Let us import necessary package and load the dataset</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">from</span> sklearn.datasets <span style="color:#f92672">import</span> load_iris
+
+data <span style="color:#f92672">=</span> load_iris()
+
+iris_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(np<span style="color:#f92672">.</span>c_[data<span style="color:#f92672">.</span>data, data<span style="color:#f92672">.</span>target], columns<span style="color:#f92672">=</span>data<span style="color:#f92672">.</span>feature_names <span style="color:#f92672">+</span> [<span style="color:#e6db74">&#39;target&#39;</span>])
+
+<span style="color:#75715e"># Peek at dataset</span>
+iris_data<span style="color:#f92672">.</span>sample(<span style="color:#ae81ff">5</span>)
+</code></pre></div><figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-2-kl_iris/0-datapeek.png"/> 
+</figure>
+
+<p>Let’s look at number of class</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">iris_data<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;target&#39;</span>)<span style="color:#f92672">.</span>size()
+</code></pre></div><p>Output:</p>
+<pre><code>target  
+0.0    50  
+1.0    50  
+2.0    50  
+dtype: int64
+</code></pre><p>Because KL divergence measure similarity between two different distribution, we will only consider class 0 and class 1.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">iris_two <span style="color:#f92672">=</span> iris_data[iris_data<span style="color:#f92672">.</span>target<span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>]
+iris_two<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;target&#39;</span>)<span style="color:#f92672">.</span>size()
+</code></pre></div><p>Output:</p>
+<pre><code>target  
+0.0    50  
+1.0    50  
+dtype: int64
+</code></pre><p> </p>
+<h2 id="define-kl-divergence">Define KL Divergence</h2>
+<p>Let’s convert the above equation into code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">KL_div</span>(P, Q):
+    <span style="color:#75715e"># First convert to np array</span>
+    P <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(P)
+    Q <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(Q)
+    
+    <span style="color:#75715e"># Then compute their means</span>
+    mu_P <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(P, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    mu_Q <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(Q, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)    
+    
+    <span style="color:#75715e"># Compute their covariance</span>
+    cov_P <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cov(P, rowvar<span style="color:#f92672">=</span>False)
+    cov_Q <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cov(Q, rowvar<span style="color:#f92672">=</span>False)    
+        
+    cov_Q_inv <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(cov_Q)
+    
+    <span style="color:#75715e"># Compute KL divergence</span>
+    KL_div <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>det(cov_Q)<span style="color:#f92672">/</span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>det(cov_P)) <span style="color:#f92672">-</span> mu_P<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>trace(cov_Q_inv<span style="color:#a6e22e">@cov_P</span>) <span style="color:#f92672">+</span> \
+                (mu_P <span style="color:#f92672">-</span> mu_Q)<span style="color:#f92672">.</span>T<span style="color:#a6e22e">@cov_Q_inv</span><span style="color:#960050;background-color:#1e0010">@</span>(mu_P <span style="color:#f92672">-</span> mu_Q)
+    
+    KL_div <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> KL_div
+    
+    <span style="color:#66d9ef">return</span> KL_div
+</code></pre></div><p>Now we are ready to compute KL divergence on each pre-defined case.</p>
+<h2 id="case-1-same-class-two-features">Case 1: Same class, two features</h2>
+<p>This case will only consider class 0 and two features of class 0. We will split the class 0 data into two, our hypothesis is KL divergence should give value close to zero.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">iris0 <span style="color:#f92672">=</span> iris_two[iris_two<span style="color:#f92672">.</span>target<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(iris0<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;target&#39;</span>)<span style="color:#f92672">.</span>size())
+<span style="color:#66d9ef">print</span>(iris0<span style="color:#f92672">.</span>shape)
+</code></pre></div><p>Output:</p>
+<pre><code>target
+0.0    50
+dtype: int64
+
+(50, 5)
+</code></pre><p>There are 50 samples of class 0, we will split this into data consisting of 25 samples each.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Only take two features</span>
+iris0 <span style="color:#f92672">=</span> iris0[[<span style="color:#e6db74">&#39;sepal length (cm)&#39;</span>, <span style="color:#e6db74">&#39;petal length (cm)&#39;</span>]]
+<span style="color:#75715e"># Divide the data into two set _1 and _2</span>
+iris0_1 <span style="color:#f92672">=</span> iris0<span style="color:#f92672">.</span>iloc[:<span style="color:#ae81ff">25</span>]
+iris0_2 <span style="color:#f92672">=</span> iris0<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">25</span>:]
+<span style="color:#66d9ef">print</span>(iris0_1<span style="color:#f92672">.</span>shape)
+</code></pre></div><p>Output:</p>
+<pre><code>(25, 2)
+</code></pre><p>Next, we can visualize how the two features are distributed</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Visualization of how features are distributed</span>
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>))
+iris0_1<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scatter&#39;</span>, ax<span style="color:#f92672">=</span>ax, x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+iris0_2<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scatter&#39;</span>, ax<span style="color:#f92672">=</span>ax, x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;b&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-2-kl_iris/same_class_two_feat.png"/> 
+</figure>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">KL_0_0_2feat <span style="color:#f92672">=</span> KL_div(iris0_1, iris0_2)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;The value of KL divergence of two data from the same class: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_0_2feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;This should be quite small, close to zero&#39;</span>)
+</code></pre></div><p>Output:</p>
+<pre><code>The value of KL divergence of two data from the same class: 0.190
+This should be quite small, close to zero
+</code></pre><p> </p>
+<h2 id="case-2-different-class-two-features">Case 2: Different class, two features</h2>
+<p>Previously we already had data of class 0 stored in <code>iris0</code>, let`s grab the data of class 1</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Take iris dataset of class 1</span>
+iris1 <span style="color:#f92672">=</span> iris_two[iris_two<span style="color:#f92672">.</span>target<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>]
+<span style="color:#66d9ef">print</span>(iris1<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;target&#39;</span>)<span style="color:#f92672">.</span>size())
+
+<span style="color:#75715e"># Only grab two features</span>
+iris1 <span style="color:#f92672">=</span> iris1[[<span style="color:#e6db74">&#39;sepal length (cm)&#39;</span>, <span style="color:#e6db74">&#39;petal length (cm)&#39;</span>]]
+</code></pre></div><p>Output:</p>
+<pre><code>target
+1.0    50
+dtype: int64
+</code></pre><p>Then, we can visualize features of <code>iris1</code> and <code>iris0</code> to see their distributions</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Visualize both dataset class 0 and class 1</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>))
+iris0<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scatter&#39;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sepal length (cm)&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;petal length (cm)&#39;</span>, ax<span style="color:#f92672">=</span>ax, c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;b&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+iris1<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scatter&#39;</span>, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sepal length (cm)&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;petal length (cm)&#39;</span>, ax<span style="color:#f92672">=</span>ax, c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-2-kl_iris/diff_class_two_feat.png"/> 
+</figure>
+
+<p>It`s crystal clear that two data are consisting of two different classes, red and blue features distributed differently, we expect the KL divergence to be quite high, or at least higher than the previous one.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">KL_0_1_2feat <span style="color:#f92672">=</span> KL_div(iris0, iris1)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;The value of KL divergence of two data from the same class: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_1_2feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;This should be bigger than previous result&#39;</span>)
+</code></pre></div><p>Output:</p>
+<pre><code>The value of KL divergence of two data from the same class: 26.676
+This should be bigger than previous result
+</code></pre><p>Bingo, the result matches our expectations, now let`s extend this example into using all four features of our data.
+ </p>
+<h2 id="case-3-same-class-four-features">Case 3: Same class, four features</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Take only class 0, all four features</span>
+iris0_4feat <span style="color:#f92672">=</span> iris_two<span style="color:#f92672">.</span>loc[(iris_two<span style="color:#f92672">.</span>target<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)]
+<span style="color:#75715e"># Divide them into two groups</span>
+iris0_4feat_1 <span style="color:#f92672">=</span> iris0_4feat<span style="color:#f92672">.</span>iloc[:<span style="color:#ae81ff">25</span>, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+iris0_4feat_2 <span style="color:#f92672">=</span> iris0_4feat<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">25</span>:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;All data shape:&#39;</span>, iris0_4feat<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Group 1 shape:&#39;</span>, iris0_4feat_1<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Group 2 shape:&#39;</span>, iris0_4feat_2<span style="color:#f92672">.</span>shape)
+
+</code></pre></div><p>Output:</p>
+<pre><code>All data shape: (50, 5)
+Group 1 shape: (25, 4)
+Group 2 shape: (25, 4)
+</code></pre><p>We expect the KL divergence to be small, because the two data come from same class</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">KL_0_0_4feat <span style="color:#f92672">=</span> KL_div(iris0_4feat_1, iris0_4feat_2)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;The value of KL divergence of two data from the same class: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_0_4feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;This should be quite small ~ 0&#39;</span>)
+</code></pre></div><p>Output:</p>
+<pre><code>The value of KL divergence of two data from the same class: 0.857
+This should be quite small ~ 0
+</code></pre><p> </p>
+<h2 id="case-4-different-classes-four-features">Case 4: Different classes, four features</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Take class 0 and 1 only</span>
+iris0_4feat <span style="color:#f92672">=</span> iris_two<span style="color:#f92672">.</span>loc[(iris_two<span style="color:#f92672">.</span>target<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)]
+iris1_4feat <span style="color:#f92672">=</span> iris_two<span style="color:#f92672">.</span>loc[(iris_two<span style="color:#f92672">.</span>target<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>)]
+
+<span style="color:#75715e"># Remove target column</span>
+iris0_4feat <span style="color:#f92672">=</span> iris0_4feat<span style="color:#f92672">.</span>iloc[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+iris1_4feat <span style="color:#f92672">=</span> iris1_4feat<span style="color:#f92672">.</span>iloc[:, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Group 1 shape:&#39;</span>,iris0_4feat<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Group 2 shape:&#39;</span>,iris1_4feat<span style="color:#f92672">.</span>shape)
+</code></pre></div><p>Output:</p>
+<pre><code>Group 1 shape: (50, 4)
+Group 2 shape: (50, 4)
+</code></pre><p>Next, compute KL divergence</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">KL_0_1_4feat <span style="color:#f92672">=</span> KL_div(iris0_4feat, iris1_4feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;The value of KL divergence of two data from the same class: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_1_4feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;This should be quite large &gt;&gt; 0&#39;</span>)
+</code></pre></div><p>Output:</p>
+<pre><code>The value of KL divergence of two data from the same class: 52.724
+This should be quite large &gt;&gt; 0
+</code></pre><h2 id="recap">Recap</h2>
+<p>Now here`s a recap of all similarity results:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;KL divergence between two class&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;using two features: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_1_2feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;using four features: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_1_4feat)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;KL divergence of same class&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;using two features: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_0_2feat)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;using four features: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>KL_0_0_4feat)
+</code></pre></div><p>Output:</p>
+<pre><code>KL divergence between two class
+using two features: 26.676
+using four features: 52.724
+
+KL divergence of same class
+using two features: 0.278
+using four features: 0.857
+</code></pre><p>This is the end of this blog, constructive feedbacks and suggestions are welcome. Hope this example will be of any use to you. Have a good day!</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-understanding-kl-divergence-2b382ca2b2a8">https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-understanding-kl-divergence-2b382ca2b2a8</a></li>
+<li><a href="https://stats.stackexchange.com/questions/257735/kl-divergence-between-two-bivariate-gaussian-distribution">https://stats.stackexchange.com/questions/257735/kl-divergence-between-two-bivariate-gaussian-distribution</a></li>
+<li><a href="https://mr-easy.github.io/2020-04-16-kl-divergence-between-2-gaussian-distributions/">https://mr-easy.github.io/2020-04-16-kl-divergence-between-2-gaussian-distributions/</a></li>
+</ol>
 <ul class="pa0">
   
    <li class="list">
-     <a href="https://orvindemsy.github.io/tags/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif"></a>
+     <a href="https://orvindemsy.github.io/tags/kl_div" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">kl_div</a>
+   </li>
+  
+   <li class="list">
+     <a href="https://orvindemsy.github.io/tags/similarity" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">similarity</a>
    </li>
   
 </ul>
@@ -205,17 +427,6 @@
 
 
 
-
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">Related</p>
-    <ul class="pa0 list">
-	   
-	     <li  class="mb2">
-          <a href="https://orvindemsy.github.io/blog/blog-1/">Data Alignment using Euclidean Alignment</a>
-        </li>
-	    
-    </ul>
-</div>
 
 </aside>
 

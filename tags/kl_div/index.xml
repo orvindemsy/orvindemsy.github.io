@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kl_div on Orvin Demsy</title>
+    <link>https://orvindemsy.github.io/tags/kl_div/</link>
+    <description>Recent content in kl_div on Orvin Demsy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/kl_div/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KL divergence on iris dataset</title>
+      <link>https://orvindemsy.github.io/blog/blog-2/</link>
+      <pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/blog/blog-2/</guid>
+      <description>KL Divergence on Multivariate Gaussian (Example on Iris Dataset) I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1]. But I could not find example KL divergence on multivariate data.</description>
+    </item>
+    
+  </channel>
+</rss>
