@@ -6,7 +6,17 @@
     <description>Recent content in bci on Orvin Demsy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/bci/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/bci/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Euclidean Alignment and Weighted Transfer Learning on MI-based BCI</title>
+      <link>https://orvindemsy.github.io/post/project-5/</link>
+      <pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/post/project-5/</guid>
+      <description>Here comes my first experiment combining two TL techniques for BCI in two different BCI steps. Now, before going further into details here&amp;rsquo;s the outline of this blog :
+ Basic BCI Steps and TL in BCI Euclidean Alignment (EA) Weighted Transfer Learning (wLTL) EA-wLTL Attempt  To keep it sane, I will try to introduce each section as minimum as possible without leaving crucial points. In the end section I will show my result, which and possible future improvement.</description>
+    </item>
+    
     <item>
       <title>Basic Two-Class BCI Motor Imagery Display</title>
       <link>https://orvindemsy.github.io/post/project-2/</link>
