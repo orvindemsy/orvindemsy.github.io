@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Dealing with Missing Data in Python | Orvin Demsy</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.77.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="https://orvindemsy.github.io/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Dealing with Missing Data in Python" />
+<meta property="og:description" content="Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python. The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.
+The Problem with Missing Data Why deal with missing data In this section I come to know the difference between None and np." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://orvindemsy.github.io/blog/blog-4/" />
+<meta property="article:published_time" content="2021-05-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-05-01T00:00:00+00:00" />
+<meta itemprop="name" content="Dealing with Missing Data in Python">
+<meta itemprop="description" content="Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python. The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.
+The Problem with Missing Data Why deal with missing data In this section I come to know the difference between None and np.">
+<meta itemprop="datePublished" content="2021-05-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-05-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2550">
+
+
+
+<meta itemprop="keywords" content="datacamp,data-science," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dealing with Missing Data in Python"/>
+<meta name="twitter:description" content="Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python. The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.
+The Problem with Missing Data Why deal with missing data In this section I come to know the difference between None and np."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://orvindemsy.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Orvin Demsy
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://orvindemsy.github.io/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://orvindemsy.github.io/blog/" title="Blog page">
+              Blog
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://orvindemsy.github.io/contact/" title="Contacts page">
+              Contacts
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://orvindemsy.github.io/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/orvin-demsy" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/orvindemsy" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        BLOG
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://orvindemsy.github.io/blog/blog-4/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://orvindemsy.github.io/blog/blog-4/&amp;text=Dealing%20with%20Missing%20Data%20in%20Python" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://orvindemsy.github.io/blog/blog-4/&amp;title=Dealing%20with%20Missing%20Data%20in%20Python" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Dealing with Missing Data in Python</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-05-01T00:00:00Z">May 1, 2021</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python.  The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.</p>
+<!-- raw HTML omitted -->
+<h2 id="the-problem-with-missing-data">The Problem with Missing Data</h2>
+<h3 id="why-deal-with-missing-data">Why deal with missing data</h3>
+<p>In this section I come to know the difference between <code>None</code> and <code>np.nan</code>. Printing types of None and np.nan will give respective types. None is NoneType, while np.nan is a float type</p>
+<pre><code>print(type(None))
+print(type(np.nan))
+</code></pre><p>&lt;class &lsquo;NoneType&rsquo;&gt;<br>
+&lt;class &lsquo;float&rsquo;&gt;</p>
+<p>Therefore, np.nan can handle arithmetic and logical operations, while None cannot.</p>
+<pre><code>try:
+    print(None + None)
+except:
+    print('Cannot add None')
+    
+try:
+    print(np.nan + np.nan)
+except:
+    print('Cannot add np.nan')
+</code></pre><p>Cannot add None<br>
+nan</p>
+<p>The behaviors of comparing these two are also different:</p>
+<pre><code>print(None == None)
+print(np.nan == np.nan)
+</code></pre><p>True<br>
+False</p>
+<h3 id="handling-missing-values">Handling missing values</h3>
+<p>Summary:</p>
+<ul>
+<li>In the dataset, missing values might be represented with ‘.’, ‘NA’, ‘-‘, or <code>0</code></li>
+<li>Beware of missing values in disguise as zero (to detect this one requires specific domain knowledge)</li>
+<li>Replace <code>0</code> with <code>NaN</code> is usually a good practice</li>
+</ul>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-1/diabetes-bmi-zero.png"/> 
+</figure>
+
+<p>As can be seen above the in the BMI column, the minimum value is <code>0</code>, this is impossible since BMI cannot be <code>0</code>. This is an example of <code>NaN</code> values in disguise, one requires domain knowledge in this field to detect that <code>0</code> is a problem. Failing to acknowledge <code>0</code> can cause problems for further analysis.</p>
+<h3 id="analyze-amount-of-missingness">Analyze amount of missingness</h3>
+<p>Summary:</p>
+<ul>
+<li>How to detect missingness numerically</li>
+<li>How to detect missingness graphically</li>
+<li>Percentage of missingness</li>
+<li>Nullity matrix for regular dataset</li>
+<li>Nullity matrix for time series dataset</li>
+</ul>
+<p>Use <code>isna()</code> to detect each NaN values on each column, then <code>sum()</code> to see missing value in each column</p>
+<pre><code># Missingness each column
+diabetes.isna().sum()
+</code></pre><pre><code>Pregnant               0
+Glucose                5
+Diastolic_BP          35
+Skin_Fold            227
+Serum_Insulin        374
+BMI                   11
+Diabetes_Pedigree      0
+Age                    0
+Class                  0
+dtype: int64
+</code></pre><p>We can also see the % of missing value by doing the following</p>
+<pre><code># Missingness in %
+diabetes.isna().mean()*100
+</code></pre><pre><code>Pregnant              0.000000
+Glucose               0.651042
+Diastolic_BP          4.557292
+Skin_Fold            29.557292
+Serum_Insulin        48.697917
+BMI                   1.432292
+Diabetes_Pedigree     0.000000
+Age                   0.000000
+Class                 0.000000
+dtype: float64
+</code></pre><p>Another way to see the missing value is by creating nullity matrix, which can generated using <code>missingno</code> package which is usually imported as <code>msno</code>. Here is the nullity matrix for regular dataset using pima diabetes dataset and time-series dataset using air quality dataset</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-1/diabetes-null-matrix.png"/> 
+</figure>
+
+<p>Note that to create nullity matrix with time series dataset, it is better to have the index of the dataset as index of date. Having this type as index allow us to specify the freq parameter in the msno.matrix(). In the example we set the freq= ‘M’ which implies we want to categorize the data into each month.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-1/airq-null-matrix.png"/> 
+</figure>
+
+<!-- raw HTML omitted -->
+<h2 id="does-missingness-have-a-pattern">Does Missingness Have a Pattern?</h2>
+<h3 id="is-the-data-missing-at-random">Is the data missing at random?</h3>
+<p>Summary:</p>
+<ul>
+<li>There are three types of missingness MCAR, MAR, MNAR</li>
+<li>Sorting by variables helps us detecting missingness patterns.</li>
+</ul>
+<p>Three types of missingness:</p>
+<ol>
+<li>Missing Completely at Random (MCAR)
+Missingness has no relationship between any values, observed or missing</li>
+</ol>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/mcar-mar.png"/> 
+</figure>
+
+<p>The ‘Glucose’ and ‘BMI’ follows this type since we cannot observe any correlation or pattern as to why those values are missing. The correlation here means dependency of certain missing values on another variable. This missingness typically only have few missing values.</p>
+<ol start="2">
+<li>Missing at Random (MAR)
+Missingness has systematic relationship to other observed data, but not missing data. MAR means that there might be a relationship with another variable. It is important to note that missingness only dependent only on observed values and not missing values of MAR.</li>
+</ol>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/mcar-mar.png"/> 
+</figure>
+
+<p>The ‘Diastolic BP’ is an example of MAR. See that there are many missing values in this column (more that MCAR), this is the typical case for MAR. There is a underlying reason that cannot be directly observed.</p>
+<ol start="3">
+<li>Missing not at Random (MNAR)
+Missingness has relationship to other missing data or non-missing data.</li>
+</ol>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/mnar.png"/> 
+</figure>
+
+<p>The ‘Serum Insulin’ and ‘Skin Fold’ exhibit this type. Sorting the dataset helps identify the pattern.</p>
+<h3 id="finding-patterns-in-missing-data">Finding patterns in missing data</h3>
+<p>Summary:</p>
+<p>We can find the correlation between missingness using <code>heatmap</code> and <code>dendrogram</code> method from <code>msno</code></p>
+<ol>
+<li>Missingness Heatmap</li>
+</ol>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/heatmap.png"/> 
+</figure>
+
+<p>Missingness heatmap describes correlation of missingness between columns. It explains the dependencies of missing value between columns. Correlation value is high when values between two columns are both missing, and vice versa. The redder the color, the lower the correlation of missingness, the blur the higher the correlation of missingness. Following previous description, we can see there is high correlation between <code>Serum_Insulin</code> and <code>Skin_Fold</code>.</p>
+<ol start="2">
+<li>Missingness Dendrogram</li>
+</ol>
+<p>A dendrogram is a tree diagram that groups similar objects in close branches, this implies columns with high correlation of missingness will be grouped together.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/dendrogram.png"/> 
+</figure>
+
+<p>This graph is interpreted from the top-down perspective.  The right-hand numerical values from 0 on the top denotes the correlation. In accordance with previous heatmap we observed that <code>Skin_Fold</code> and <code>Serum_Insulin</code> are highly correlated. The missingness of <code>BMI</code> is more similar to <code>Glucose</code> thanto <code>Diastolic_BP</code>.  Cluster <code>Class</code>, <code>Age</code>, <code>Pregnant</code> and <code>Diabetes_Pedigree</code> are linked together at distance of zero and fully predict one another’s presence, this means, one column might always be empty while another is filled or both can be always empty, or filled, and so on (low missingness correlation).</p>
+<h3 id="visualizing-missingness-across-a-variable">Visualizing missingness across a variable</h3>
+<p>The main idea of this section is how to visualize the missingness between two variables. We can visualize a scatter plot between <code>BMI</code> and <code>Serum Insulin</code> as shown in the following figure:</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/viz_missingness.png"/> 
+</figure>
+
+<p>The red points denote the missing value (NA), while the purple denote not missing value (not NA). The missing values need to be created by some random number, because the plot will not read NaN values. We can see from the figure above, the <code>Serum_Insulin</code> NA values is greater than <code>BMI</code> NA values.</p>
+<h3 id="when-and-how-to-delete-missing-data">When and how to delete missing data</h3>
+<p>Summary:</p>
+<ul>
+<li>Two types of deletion, pairwise and listwise deletion</li>
+<li>Deletion is used only when values are MCAR type</li>
+</ul>
+<ol>
+<li>Pairwise deletion</li>
+</ol>
+<p>My understanding of this is deletion is that it’s not actually delete any rows or columns, is just simply ignoring the NaN values. The instructor said that the operation in pandas skip the missing values which is equivalent to pairwise deletion. Pairwise deletion minimized amount of data loss but might negatively affect analysis for some cases.</p>
+<pre><code># Pairwise deletion
+mean1 = diabetes['BMI'].mean()
+print(mean1)
+
+# The above result equal to
+mean2 = diabetes['BMI'][diabetes['BMI'].notna()].sum() / diabetes['BMI'].count()
+print(mean2)
+</code></pre><ol start="2">
+<li>Listwise deletion</li>
+</ol>
+<p>In this deletion, the whole row containing even one missing value is dropped. It is also called complete case analysis. The command <code>dropna(subset=’Glucose’, how=’any’)</code> will check the value in <code>Glucose</code> and <code>how=’any’</code> will drop the entire row.  This major drawbacks of listwise deletion are the amount of data lost, thus it’s recommended to perform this when missing values is very small. Here is how result of performing listwise deletion on <code>BMI</code> column as shown by nullity matrix.</p>
+<pre><code># Listwise deletion
+_ = msno.matrix(diabetes, figsize=(8, 3), fontsize=11)
+
+# Print the number of missing values in Glucose
+print(diabetes['BMI'].isnull().sum())
+
+# Drop rows where 'Glucose' has a missing value
+diabetes_drop = diabetes.dropna(subset=['BMI'], how='any')
+
+# Visualize the missingness of diabetes after dropping missing values
+_ = msno.matrix(diabetes_drop, figsize=(8, 3), fontsize=11)
+</code></pre><figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-2/before-after-listwise.png"/> 
+</figure>
+
+<!-- raw HTML omitted -->
+<h2 id="imputation-technique">Imputation Technique</h2>
+<p>Summary:</p>
+<ul>
+<li>Impute means to represent/substitute/replace missing values with another values.</li>
+<li>Some basic imputation techniques are mean, median, mode or constants.</li>
+<li>Mean, median, mode imputations preserve the basic statistical features of respective variables but ignore their correlations.</li>
+</ul>
+<h3 id="mean-median-mode-imputations">Mean, median, mode imputations</h3>
+<p>The following code will perform basic imputation using mean, median, constant respectively.</p>
+<pre><code># MEAN
+# Make a copy of diabetes
+diabetes_mean = diabetes.copy(deep=True)
+
+# Create mean imputer object
+mean_imputer = SimpleImputer(strategy='mean')
+
+# Impute mean values in the DataFrame diabetes_mean
+diabetes_mean.iloc[:, :] = mean_imputer.fit_transform(diabetes_mean)
+</code></pre><pre><code># MEDIAN
+# Make a copy of diabetes
+diabetes_median = diabetes.copy(deep=True)
+
+# Create median imputer object
+median_imputer = SimpleImputer(strategy='median')
+
+# Impute median values in the DataFrame diabetes_median
+diabetes_median.iloc[:, :] = median_imputer.fit_transform(diabetes_median)
+</code></pre><pre><code># MODE
+# Make a copy of diabetes
+diabetes_mode = diabetes.copy(deep=True)
+
+# Create mode imputer object
+mode_imputer = SimpleImputer(strategy='most_frequent')
+
+# Impute using most frequent value in the DataFrame mode_imputer
+diabetes_mode.iloc[:, :] = mode_imputer.fit_transform(diabetes_mode)
+</code></pre><pre><code># CONSTANT
+# Make a copy of diabetes
+diabetes_constant = diabetes.copy(deep=True)
+
+# Create median imputer object
+constant_imputer = SimpleImputer(strategy='constant', fill_value=0)
+
+# Impute missing values to 0 in diabetes_constant
+diabetes_constant.iloc[:, :] = constant_imputer.fit_transform(diabetes_constant)
+</code></pre><p>And this is how the imputations look like graphically, where the red values are imputes values. As can be seen the imputed values ignore the correlation between variables.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/compare-simple-impute.png"/> 
+</figure>
+
+<h3 id="imputing-time-series-data">Imputing time-series data</h3>
+<p>Summary:</p>
+<ul>
+<li>Two methods to fill time-series NA values, using fillna() or interpolate()</li>
+<li>Fillna() allow use to fill using backward or forward fill method</li>
+<li>Interpolation has three technique, linear, quadratic or nearest values.</li>
+</ul>
+<ol>
+<li><code>fillna()</code></li>
+</ol>
+<ul>
+<li>Forward fill</li>
+</ul>
+<p>Forward fill fills the NA values with the last observed value, in this case <code>37</code>.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/fillna_ffill.png"/> 
+</figure>
+
+<ul>
+<li>Backward fill</li>
+</ul>
+<p>Backward fill fills the NA values with the next observed value, in this case <code>29</code>.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/fillna_bfill.png"/> 
+</figure>
+
+<ol start="2">
+<li><code>interpolation()</code></li>
+</ol>
+<ul>
+<li>Linear interpolation</li>
+</ul>
+<p>Linear interpolation will fill the missing values between two values with equidistantly incrementing values.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/interpolate_linear.png"/> 
+</figure>
+
+<ul>
+<li>Quadratic interpolation</li>
+</ul>
+<p>Quadratic interpolation will fill the missing values between two values with some quadratic values. This means filling with parabolic trajectory either in the negative or positive direction depends on the values enclosing the missing values. Note that this kind of values are highly unlikely.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/interpolate_quadratic.png"/> 
+</figure>
+
+<ul>
+<li>Nearest interpolation</li>
+</ul>
+<p>Nearest interpolation will fill the missing value with values nearest to current index. It looks like the combination of <code>ffill</code> and <code>bfill</code>.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/interpolate_nearest.png"/> 
+</figure>
+
+<h3 id="visualizing-time-series-imputations">Visualizing time-series imputations</h3>
+<p>This section will compare all the imputation technique we have learnt in previous section. The linear imputation is found to best imputation for the air quality data. Forward, backward, and nearest technique impute same values to missing values. The quadratic imputation overshoots the missing values. Personally, I still confuse about this, in the lecture it is not mentioned as to why the linear imputation is the best method for this dataset, I guess domain expertise knowledge is needed to decide which imputation technique is best.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-3/time-series-impute.png"/> 
+</figure>
+
+<h2 id="advanced-imputation-techniques">Advanced Imputation Techniques</h2>
+<h3 id="imputing-using-fancyimpute">Imputing using <code>fancyimpute</code></h3>
+<p>Summary:</p>
+<ul>
+<li>Learning how to use machine learning algorithm (KNN and MICE) to impute missing values</li>
+<li>Advanced imputing techniques use other columns as well to predict missing values in a column</li>
+</ul>
+<p>KNN<br>
+KNN uses K-Nearest Neighbor algorithm for predicting missing values. KNN will compute K similar data points of non-missing values to fill the missing values.</p>
+<pre><code># Import KNN from fancyimpute
+from fancyimpute import KNN
+
+# Copy diabetes to diabetes_knn_imputed
+diabetes_knn_imputed = diabetes.copy(deep=True)
+
+# Initialize KNN imputer
+knn_imputer = KNN()
+
+# Impute using fit_tranform on diabetes_knn_imputed
+diabetes_knn_imputed.iloc[:, :] = knn_imputer.fit_transform(diabetes_knn_imputed)
+</code></pre><p>MICE Multiple Imputation by Chain Equation)
+MICE imputation is very robust and complex model for imputing missing values. It uses multiple regression over random sample of the data and takes an average of multiple regression value to fill the missing values.</p>
+<pre><code># Import IterativeImputer from fancyimpute
+from fancyimpute import IterativeImputer
+
+# Copy diabetes to diabetes_mice_imputed
+diabetes_mice_imputed = diabetes.copy(deep=True)
+
+# Initialize IterativeImputer
+mice_imputer = IterativeImputer()
+
+# Impute using fit_tranform on diabetes
+diabetes_mice_imputed.iloc[:, :] = mice_imputer.fit_transform(diabetes)
+</code></pre><h3 id="imputing-categorical-values">Imputing categorical values</h3>
+<p>Summary:
+We learn how to impute categorical data, the steps are:</p>
+<ul>
+<li>Convert non-missing categorical columns to ordinal values.</li>
+<li>Impute missing values using the pre-computed ordinal values.</li>
+<li>Convert original values to categorical values.</li>
+</ul>
+<p>Complexity with categorical values:</p>
+<ul>
+<li>They are strings.</li>
+<li>Cannot perform operations on strings.</li>
+<li>Necessity to encode categorical variable to numerical values.</li>
+</ul>
+<p>There are two ways to convert strings to numerical values, either with one-hot encoder, or ordinal encoder, in this lesson ordinal encoder will be used. Ordinal encode will assign numerical values to each category.</p>
+<p>The <code>OrdinalEncoder</code> will be exported from <code>sklearn.preprocessing</code>. But it cannot handle NaN thus, we need to skip the NaN and convert categorical values.</p>
+<pre><code>from sklearn.preprocessing import OrdinalEncoder
+
+# Create Ordinal encoder
+ambience_ord_enc = OrdinalEncoder()
+
+# Select non-null values of ambience column in users
+ambience = users['ambience']
+ambience_not_null = ambience[ambience.notnull()]
+
+# Reshape ambience_not_null to shape (-1, 1)
+reshaped_vals = ambience_not_null.values.reshape(-1, 1)
+
+# Ordinally encode reshaped_vals
+encoded_vals = ambience_ord_enc.fit_transform(reshaped_vals)
+
+# Assign back encoded values to non-null values of ambience in users
+users.loc[ambience.notnull(), 'ambience'] = np.squeeze(encoded_vals)
+</code></pre><p>We can generalize the code above, so that it works for all columns with categorical values, note that, each categorical encoder handles encode specific set of strings, thus we create a dictionary filled with encoder. This is needed since we want to convert categorical values back to strings later after imputing.</p>
+<pre><code class="language-#" data-lang="#">ordinal_enc_dict = {}
+
+for col_name in users:
+    # Create Ordinal encoder for col
+    ordinal_enc_dict[col_name] = OrdinalEncoder()
+    col = users[col_name]
+    
+    # Select non-null values of col
+    col_not_null = col[col.notnull()]
+    reshaped_vals = col_not_null.values.reshape(-1, 1)
+    encoded_vals = ordinal_enc_dict[col_name].fit_transform(reshaped_vals)
+    
+    # Store the values to non-null values of the column in users
+    users.loc[col.notnull(), col_name] = np.squeeze(encoded_vals)
+
+</code></pre><p>Next is to impute the data. The KNN imputer will be used. Notice that here, we use the encoder back to convert them back from numerical to categorical values. The code is as follows:</p>
+<pre><code>
+# Create KNN imputer
+from fancyimpute import KNN
+
+# Create KNN imputer
+KNN_imputer = KNN()
+
+# Impute and round the users DataFrame
+users.iloc[:, :] = np.round(KNN_imputer.fit_transform(users))
+
+# Loop over the column names in users
+for col_name in users:
+    
+    # Reshape the data
+    reshaped = users[col_name].values.reshape(-1, 1)
+    
+    # Perform inverse transform of the ordinally encoded columns
+    users[col_name] = ordinal_enc_dict[col_name].inverse_transform(reshaped)
+</code></pre><h3 id="evaluation-of-different-imputation-techniquesummary">Evaluation of different imputation techniqueSummary:</h3>
+<p>Reason to impute missing values:</p>
+<ul>
+<li>Improve model performance.</li>
+<li>Decrease bias.</li>
+</ul>
+<p>A good measure to evaluate quality of imputation technique on the dataset is to look how machine learning model perform against each imputation. A simple regression will be used on different imputed data done in previous section.</p>
+<p>We can also observe the density plot and observe which one most resemble the shape of the original data.</p>
+<ol>
+<li>Fitting a linear model against different imputation
+The baseline will be imputation using line-wise deletion (complete case).</li>
+</ol>
+<pre><code># As basline the diabetes dataset with listwise imputataion/complete case (cc)
+diabetes_cc = diabetes.dropna(how='any')
+
+# Add constant to X and set X &amp; y values to fit linear model
+X = sm.add_constant(diabetes_cc.iloc[:, :-1])
+y = diabetes_cc['Class']
+lm = sm.OLS(y, X).fit()
+
+# Print summary of lm
+print('\nSummary: ', lm.summary())
+
+print('===='*15)
+# Print R squared score of lm
+print('\nAdjusted R-squared score: ', lm.rsquared_adj)
+
+print('===='*15)
+# Print the params of lm
+print('\nCoefficcients:\n', lm.params)
+</code></pre><pre><code>================================================
+
+Adjusted R-squared score:  0.33210805003287613
+================================================
+
+Coefficcients:
+ const               -1.102677
+Pregnant             0.012953
+Glucose              0.006409
+Diastolic_BP         0.000055
+Skin_Fold            0.001678
+Serum_Insulin       -0.000123
+BMI                  0.009325
+Diabetes_Pedigree    0.157192
+Age                  0.005878
+dtype: float64
+</code></pre><p>* The whole summary is not shown.</p>
+<p>The adjusted R-squared and coefficient can be used to evaluate model performance. The R squared measures the accuracy of machine learning model, coefficient indicates the weight of each feature in the data. The higher R-squared is the better the model.</p>
+<p>We evaluate the linear model on the different imputed dataset. In this lesson, mean, KNN, MICE imputed data will be compared. The resulting R-squared of each model are compared.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-4/r-squared.png"/> 
+</figure>
+
+<p>Mean imputation has the lowest R squared values, as mean imputation only imputes constant values to missing datapoints. The complete case imputation has highest R squared because most of the data are dropped, thus it tends to be more likely to fit the linear model more. Keep in mind that complete case serves as a baseline.</p>
+<ol start="2">
+<li>Observe density plot</li>
+</ol>
+<p>We can also observe the density plot between each model. We can see that mean imputation does not show similarity to baseline unlike the density with KNN or MICE imputation. This again demostrates the disadvantage of using simple imputing technique such as mean.</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-4-missing-data-py/ch-4/kde-lm.png"/> 
+</figure>
+
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="https://orvindemsy.github.io/tags/datacamp" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">datacamp</a>
+   </li>
+  
+   <li class="list">
+     <a href="https://orvindemsy.github.io/tags/data-science" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">data-science</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://orvindemsy.github.io/" >
+    &copy;  Orvin Demsy 2021 
+  </a>
+    <div>
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/orvin-demsy" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/orvindemsy" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="https://orvindemsy.github.io/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

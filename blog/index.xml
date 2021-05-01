@@ -6,7 +6,17 @@
     <description>Recent content in Blog on Orvin Demsy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dealing with Missing Data in Python</title>
+      <link>https://orvindemsy.github.io/blog/blog-4/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/blog/blog-4/</guid>
+      <description>Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python. The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.
+The Problem with Missing Data Why deal with missing data In this section I come to know the difference between None and np.</description>
+    </item>
+    
     <item>
       <title>Understanding Grid Search/Randomized CV’s (refit=True)</title>
       <link>https://orvindemsy.github.io/blog/blog-3/</link>

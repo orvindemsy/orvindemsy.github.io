@@ -6,7 +6,17 @@
     <description>Recent content in Hi there! on Orvin Demsy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dealing with Missing Data in Python</title>
+      <link>https://orvindemsy.github.io/blog/blog-4/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/blog/blog-4/</guid>
+      <description>Here is my summary of things I learn from Data Camp course’s Dealing with Missing Data with Python. The dataset of Pima Indian Diabetes dataset and Air Quality dataset will be mainly used to explain each concept. The course is divided into 4 chapters, each chapter also has their own section. The structure of this article will follow the original structure of the course.
+The Problem with Missing Data Why deal with missing data In this section I come to know the difference between None and np.</description>
+    </item>
+    
     <item>
       <title>Euclidean Alignment and Weighted Transfer Learning on MI-based BCI</title>
       <link>https://orvindemsy.github.io/post/project-5/</link>
@@ -84,6 +94,15 @@ Snapshot of classification result   See here to see more about this project</des
       <description>This project is a python implementation of Andrew Ng&amp;rsquo;s Machine Learning Course on Coursera, the original course was done in MATLAB.
 Although scikit-learn package provide robust functionality to perform machine learning, this code doesn&amp;rsquo;t use it. This work also serves as an exercise for me to learn a python language.
 The course syllabus is taught over the span of eleven weeks, the details of each week&amp;rsquo;s topic are as follows:</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://orvindemsy.github.io/about/lala/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/about/lala/</guid>
+      <description></description>
     </item>
     
     <item>
