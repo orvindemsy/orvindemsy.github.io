@@ -36,7 +36,7 @@
 <meta itemprop="description" content="KL Divergence on Multivariate Gaussian (Example on Iris Dataset) I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1]. But I could not find example KL divergence on multivariate data.">
 <meta itemprop="datePublished" content="2020-08-21T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-08-21T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1199">
+<meta itemprop="wordCount" content="1186">
 
 
 
@@ -188,12 +188,19 @@
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="kl-divergence-on-multivariate-gaussian-example-on-iris-dataset">KL Divergence on Multivariate Gaussian (Example on Iris Dataset)</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>I was doing research in brain-computer interface and was interested in in the technique of transfer learning. Based on numerous papers I read, KL-divergence is a common method to measure similarity of distribution between subjects. At that time, I found an article that explained KL divergence to measure similarity on data with one variable [1].  But I could not find example KL divergence on multivariate data.</p>
 <p>As someone who had minimal knowledge in information theory, I wanted to see how, given the equation, it can be applied to multivariate data. This blog is the kind of thing I wished I had found at that time. Here I will present a quick and simple example of applying Kullback-Leibler divergence on data with multiple features (multivariate data). In this example we will use our long-old friend, iris dataset.</p>
 <h2 id="the-definition-and-equation">The Definition and Equation</h2>
-<p>Given two d dimensional data multivariate Gaussian distribution $P = \mathcal{N}(\mu_1,\Sigma_1)$ and $Q = \mathcal{N}(μ_2,Σ_2)$</p>
-<p>$$
-KL=\frac12 [log |Σ_2 |/|Σ_1 | -d+tr (Σ_2^(-1) Σ_1 )+(μ_2-μ_1 )^T Σ_2^(-1) (μ_2-μ_1 )]$$</p>
+<p>Given two <em><strong>d</strong></em> dimensional data multivariate Gaussian distribution 1 and 2, KL divergence is given as:</p>
+<figure>
+    <img src="https://orvindemsy.github.io/images/blog/blog-2-kl_iris/kl-div-eq.png"/> 
+</figure>
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>For those who are curious on the derivation of this, please look at [2], [3]. Worth noting that:</p>
 <ol>
 <li><em><strong>d</strong></em> dimensional simply means we have d features in our data.</li>
