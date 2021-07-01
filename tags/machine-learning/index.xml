@@ -6,7 +6,16 @@
     <description>Recent content in machine-learning on Orvin Demsy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://orvindemsy.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Inter-Subject Transfer Learning Using Euclidean Alignment and Transfer Component Analysis for Motor Imagery-Based BCI</title>
+      <link>https://orvindemsy.github.io/post/project-6/</link>
+      <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://orvindemsy.github.io/post/project-6/</guid>
+      <description>Abstract Abstract—Brain-computer interface (BCI) requires calibration phase to learn user-specific decoder that translates brain signals into desired commands. Calibration phase can be lengthy and exhausting for motor imagery-based (MI) BCI, and can potentially reduce the effectiveness of BCI system. Transfer learning (TL) approaches have been implemented in the field of BCI to tackle this problem. Transfer learning based on domain adaptation reduces domain discrepancy between two domains. Transfer component analysis (TCA) is one domain adaptation technique that maps features of both domains into a new space while simultaneously reducing their domain discrepancy.</description>
+    </item>
+    
     <item>
       <title>Euclidean Alignment and Weighted Transfer Learning on MI-based BCI</title>
       <link>https://orvindemsy.github.io/post/project-5/</link>
